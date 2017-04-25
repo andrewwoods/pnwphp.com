@@ -1,6 +1,9 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
+define('PROJECT_DIR', dirname(__DIR__)  );
+define('BOOTSTRAP_DIR', PROJECT_DIR . '/bootstrap'  );
+
+require_once PROJECT_DIR . '/vendor/autoload.php';
 
 // Dotenv::load(__DIR__.'/../');
 
@@ -18,7 +21,7 @@ error_reporting(-1);
 */
 
 $app = new Laravel\Lumen\Application(
-	realpath(__DIR__.'/../')
+	PROJECT_DIR
 );
 
 // $app->withFacades();
@@ -84,6 +87,17 @@ $app->singleton('conference', 'App\Model\Conference');
 
 // $app->register('App\Providers\AppServiceProvider');
 
+
+/*
+|--------------------------------------------------------------------------
+| Utility Functions
+|--------------------------------------------------------------------------
+|
+*/
+
+require_once BOOTSTRAP_DIR . '/functions.php';
+
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -95,6 +109,6 @@ $app->singleton('conference', 'App\Model\Conference');
 |
 */
 
-require __DIR__.'/../app/Http/routes.php';
+require_once PROJECT_DIR . '/app/Http/routes.php';
 
 return $app;
